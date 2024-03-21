@@ -1,0 +1,58 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <style>
+        body{
+            background: #000000;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Detection App</title>
+    <link rel="stylesheet" href="style.css">
+    </meta>
+    </meta>
+</head>
+<body>
+    <div class="content">
+        <h1>ANTI-PHISHING APP</h1>
+            <p>Use this app to detect any fake emails, <br>and figure out whether or not someone is trying to phish you!</p>
+    <input type="text" id="urlInput" placeholder="Enter URL"></input>
+    <button onclick="classifyURL()">Classify</button>
+    <p id="result"></p>
+    <div class="banner">
+        <div class="navbar">
+            <img src="bird_2.jpg" class="logo">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+             </ul>
+        </div>
+
+       
+            
+          
+        </div>
+        </div>
+    </div>
+
+<script>
+     async function classifyURL()  {
+         const url= document.getElementById('urlInput').value;
+         const response = await fetch('/classify', {
+            method: 'POST',
+            headers: {
+                 'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ url })
+           });
+           const data = await response.json();
+
+           console.log("data", data)
+
+           document.getElementById('result').innerText = `URL: ${data.url}, Phishing: ${data.is_phishing}`;
+                 }           
+ </script>    
+</body>
+</html>
